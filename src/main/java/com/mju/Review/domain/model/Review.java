@@ -25,7 +25,7 @@ public class Review {
     private LocalDateTime date;
     @Column(name = "review_content")
     private String review_content;
-    @Column(name = "likes")
+    @Column(name = "good_count")
     private int likes;
 
     public Review() {
