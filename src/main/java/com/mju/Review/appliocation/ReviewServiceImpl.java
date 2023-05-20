@@ -38,6 +38,7 @@ public class ReviewServiceImpl implements ReviewService{
     @Transactional
     public void registerReview(ReviewRegisterDto reviewRegisterDto) {
         Review review = new Review(reviewRegisterDto.getGrade(), reviewRegisterDto.getUser_photo(), reviewRegisterDto.getUser_name(), reviewRegisterDto.getReview_content());
+        if (reviewRegisterDto.getGrade()!=null && reviewRegisterDto.getUser_photo()!=null && reviewRegisterDto.getUser_name()!=null && reviewRegisterDto.getReview_content()!=null) {
             Review newreview = Review.builder()
                     .grade(review.getGrade())
                     .user_photo(review.getUser_photo())
@@ -47,6 +48,9 @@ public class ReviewServiceImpl implements ReviewService{
                     .likes(review.getLikes())
                     .build();
             reviewRepository.save(newreview);
+        } else {
+            throw new ReviewNotFindException(ExceptionList.NOT_EXISTENT_FILL_REVIEW);
+        }
     }
 
     @Override
