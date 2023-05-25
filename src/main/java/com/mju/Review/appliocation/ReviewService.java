@@ -1,7 +1,6 @@
 package com.mju.Review.appliocation;
 
 import com.mju.Review.domain.model.Review;
-import com.mju.Review.presentation.dto.ReviewComplaintDto;
 import com.mju.Review.presentation.dto.ReviewRegisterDto;
 
 import java.util.List;
@@ -25,5 +24,5 @@ public interface ReviewService {
 
     List<Review> getLiked();
 
-    void complaint(Long review_index, ReviewComplaintDto reviewComplaintDto);
+    public Review getReviewOne(Long review_index);
 }

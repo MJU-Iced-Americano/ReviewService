@@ -1,12 +1,9 @@
 package com.mju.Review.appliocation;
 
 import com.mju.Review.domain.model.Review;
-import com.mju.Review.domain.model.ReviewComplaint;
 import com.mju.Review.domain.model.other.Exception.ExceptionList;
 import com.mju.Review.domain.model.other.Exception.ReviewNotFindException;
-import com.mju.Review.domain.repository.ReviewComplaintRepository;
 import com.mju.Review.domain.repository.ReviewRepository;
-import com.mju.Review.presentation.dto.ReviewComplaintDto;
 import com.mju.Review.presentation.dto.ReviewRegisterDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +15,9 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ReviewServiceImpl implements ReviewService{
+public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final ReviewComplaintRepository complaintRepository;
 
     @Override
     @Transactional
@@ -38,7 +34,7 @@ public class ReviewServiceImpl implements ReviewService{
     @Transactional
     public void registerReview(ReviewRegisterDto reviewRegisterDto) {
         Review review = new Review(reviewRegisterDto.getGrade(), reviewRegisterDto.getUser_photo(), reviewRegisterDto.getUser_name(), reviewRegisterDto.getReview_content());
-        if (reviewRegisterDto.getGrade()!=null && reviewRegisterDto.getUser_photo()!=null && reviewRegisterDto.getUser_name()!=null && reviewRegisterDto.getReview_content()!=null) {
+        if (reviewRegisterDto.getGrade() != null && reviewRegisterDto.getUser_photo() != null && reviewRegisterDto.getUser_name() != null && reviewRegisterDto.getReview_content() != null) {
             Review newreview = Review.builder()
                     .grade(review.getGrade())
                     .user_photo(review.getUser_photo())
@@ -50,21 +46,6 @@ public class ReviewServiceImpl implements ReviewService{
             reviewRepository.save(newreview);
         } else {
             throw new ReviewNotFindException(ExceptionList.NOT_EXISTENT_FILL_REVIEW);
-        }
-    }
-
-    @Override
-    @Transactional
-    public void complaint(Long review_index, ReviewComplaintDto reviewComplaintDto) {
-        Optional<Review> optionalReview = reviewRepository.findById(review_index);
-        if(optionalReview.isPresent()){
-            Review review = optionalReview.get();
-            ReviewComplaint reviewComplaint = ReviewComplaint.builder()
-                    .complaintContent(reviewComplaintDto.getComplaintContent())
-                    .type(reviewComplaintDto.getType())
-                    .review(review)
-                    .build();
-            complaintRepository.save(reviewComplaint);
         }
     }
 
@@ -83,7 +64,7 @@ public class ReviewServiceImpl implements ReviewService{
     @Transactional
     public void incrementLiked(Long review_index) {
         Optional<Review> optionalReview = reviewRepository.findById(review_index);
-        if (optionalReview.isPresent()){
+        if (optionalReview.isPresent()) {
             Review review = optionalReview.get();
             review.incrementLike();
             reviewRepository.save(review);
@@ -127,5 +108,17 @@ public class ReviewServiceImpl implements ReviewService{
     public List<Review> getLiked() {
         List<Review> ReviewList = reviewRepository.findAll(Sort.by(Sort.Direction.DESC, "likes"));
         return ReviewList;
+    }
+
+    @Override
+    @Transactional
+    public Review getReviewOne(Long review_index) {
+        Optional<Review> optionalReview = reviewRepository.findById(review_index);
+        if (optionalReview.isPresent()) {
+            Review review = optionalReview.get();
+            return review;
+        } else {
+            throw new ReviewNotFindException(ExceptionList.NOT_EXISTENT_REVIEW);
+        }
     }
 }

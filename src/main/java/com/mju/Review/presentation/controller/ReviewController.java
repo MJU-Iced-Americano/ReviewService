@@ -4,7 +4,6 @@ import com.mju.Review.appliocation.ReviewService;
 import com.mju.Review.domain.model.Review;
 import com.mju.Review.domain.model.other.Result.CommonResult;
 import com.mju.Review.domain.service.ResponseService;
-import com.mju.Review.presentation.dto.ReviewComplaintDto;
 import com.mju.Review.presentation.dto.ReviewRegisterDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -30,20 +29,6 @@ public class ReviewController {
     @PostMapping("/review/register")
     public CommonResult registerReview(@RequestBody ReviewRegisterDto reviewRegisterDto) {
         reviewService.registerReview(reviewRegisterDto);
-        return responseService.getSuccessfulResult();
-    }
-
-    // 리뷰 신고
-    @PostMapping("/review/complaint/{review_index}")
-    public CommonResult complaint(@PathVariable Long review_index, @RequestBody ReviewComplaintDto reviewComplaintDto){
-        reviewService.complaint(review_index, reviewComplaintDto);
-        return responseService.getSuccessfulResult();
-    }
-
-    // 회원용, 운영자용 리뷰 삭제
-    @DeleteMapping("/review/delete/{review_index}")
-    public CommonResult deleteReview(@PathVariable Long review_index) {
-        reviewService.deleteReview(review_index);
         return responseService.getSuccessfulResult();
     }
 
