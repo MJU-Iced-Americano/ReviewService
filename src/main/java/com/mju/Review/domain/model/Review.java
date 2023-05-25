@@ -14,7 +14,7 @@ public class Review {
     @Id
     @Column(name = "review_index")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long reviewIndex;
     @Column(name = "review_grade")
     private Long grade;
     @Column(name = "user_photo")
