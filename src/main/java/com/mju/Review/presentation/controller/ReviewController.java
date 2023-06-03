@@ -54,7 +54,7 @@ public class ReviewController {
         return responseService.getSuccessfulResult();
     }
 
-    @DeleteMapping("review/delete/{course_index}")
+    @DeleteMapping("/review/delete/{course_index}")
     public CommonResult deleteReview(@PathVariable Long course_index, HttpServletRequest request) throws Exception {
         String userId = userService.getUserId(request);
         userService.checkUserType(userId, "TEACHER");
