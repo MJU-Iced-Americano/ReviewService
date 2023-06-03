@@ -24,10 +24,6 @@ public class Review {
     private String userId;
     @Column(name = "review_grade")
     private Long grade;
-    @Column(name = "user_photo")
-    private String user_photo;
-    @Column(name = "user_name")
-    private String user_name;
     @Column(name = "review_date")
     private LocalDateTime date;
     @Column(name = "review_content")
@@ -73,20 +69,17 @@ public class Review {
     }
 
     @Builder
-    public Review(Long grade, String user_photo, String user_name, LocalDateTime date, String review_content, int likes){
+    public Review(Long grade, String user_id, LocalDateTime date, String review_content, int likes, Long courseIndex){
         this.grade = grade;
-        this.user_photo = user_photo;
-        this.user_name = user_name;
+        this.userId = user_id;
         this.date = date;
         this.review_content = review_content;
         this.likes = likes;
         this.courseIndex = courseIndex;
     }
 
-    public Review(Long grade, String user_photo, String user_name, String review_content){
+    public Review(Long grade, String review_content){
         this.grade = grade;
-        this.user_photo = user_photo;
-        this.user_name = user_name;
         this.review_content = review_content;
     }
 

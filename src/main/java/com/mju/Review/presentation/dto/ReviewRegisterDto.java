@@ -8,7 +8,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ReviewRegisterDto {
     private Long grade;
-    private String user_photo;
-    private String user_name;
     private String review_content;
 }

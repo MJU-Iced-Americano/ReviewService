@@ -43,8 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
         if (clientReadCourseDto != null && reviewRegisterDto.getGrade() != null && reviewRegisterDto.getReview_content() != null) {
             Review newreview = Review.builder()
                     .grade(review.getGrade())
-                    .user_photo(review.getUser_photo())
-                    .user_name(review.getUser_name())
+                    .user_id(userId)
                     .date(review.getDate())
                     .review_content(review.getReview_content())
                     .likes(review.getLikes())
