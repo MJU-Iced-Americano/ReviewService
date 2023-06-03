@@ -18,13 +18,13 @@ public interface ReviewService {
     void decrementLiked(String userId, Long review_index);
     boolean checkIfAlreadyDelikedReview(Long review_index, String userId);
 
-    List<Review> getDGradeReview();
+    List<Review> getDGradeReview(Long course_index);
 
-    List<Review> getAGradeReview();
+    List<Review> getAGradeReview(Long course_index);
 
-    List<Review> getDate();
+    List<Review> getDate(Long course_index);
 
-    List<Review> getLiked();
+    List<Review> getLiked(Long course_index);
 
     public Review getReviewOne(Long review_index);
 }

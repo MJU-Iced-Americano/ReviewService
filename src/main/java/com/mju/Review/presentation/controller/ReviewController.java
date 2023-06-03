@@ -93,34 +93,38 @@ public class ReviewController {
 
     // 필터링
     // 높은 평점 순
-    @GetMapping("/review/getDgrade")
-    public CommonResult getDGradeReview() {
-        List<Review> ReviewList = reviewService.getDGradeReview();
-        CommonResult commonResult = responseService.getListResult(ReviewList);
+    @GetMapping("/review/getDgrade/{course_index}")
+    public CommonResult getDGradeReview(@PathVariable Long course_index) {
+        List<Review> ReviewList = reviewService.getDGradeReview(course_index);
+        List<Review> ReviewUserList = ReviewUsername(ReviewList);
+        CommonResult commonResult = responseService.getListResult(ReviewUserList);
         return commonResult;
     }
 
     // 낮은 평점 순
-    @GetMapping("/review/getAgrade")
-    public CommonResult getAGradeReview() {
-        List<Review> ReviewList = reviewService.getAGradeReview();
-        CommonResult commonResult = responseService.getListResult(ReviewList);
+    @GetMapping("/review/getAgrade/{course_index}")
+    public CommonResult getAGradeReview(@PathVariable Long course_index) {
+        List<Review> ReviewList = reviewService.getAGradeReview(course_index);
+        List<Review> ReviewUserList = ReviewUsername(ReviewList);
+        CommonResult commonResult = responseService.getListResult(ReviewUserList);
         return commonResult;
     }
 
     // 최신 순
-    @GetMapping("/review/getDate")
-    public CommonResult getDate() {
-        List<Review> ReviewList = reviewService.getDate();
-        CommonResult commonResult = responseService.getListResult(ReviewList);
+    @GetMapping("/review/getDate/{course_index}")
+    public CommonResult getDate(@PathVariable Long course_index) {
+        List<Review> ReviewList = reviewService.getDate(course_index);
+        List<Review> ReviewUserList = ReviewUsername(ReviewList);
+        CommonResult commonResult = responseService.getListResult(ReviewUserList);
         return commonResult;
     }
 
     // 좋아요 순
-    @GetMapping("/review/getLiked")
-    public CommonResult getLiked() {
-        List<Review> ReviewList = reviewService.getLiked();
-        CommonResult commonResult = responseService.getListResult(ReviewList);
+    @GetMapping("/review/getLiked/{course_index}")
+    public CommonResult getLiked(@PathVariable Long course_index) {
+        List<Review> ReviewList = reviewService.getLiked(course_index);
+        List<Review> ReviewUserList = ReviewUsername(ReviewList);
+        CommonResult commonResult = responseService.getListResult(ReviewUserList);
         return commonResult;
     }
 }

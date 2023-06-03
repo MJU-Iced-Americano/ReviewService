@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.swing.text.html.Option;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -130,30 +131,34 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public List<Review> getDGradeReview() {
-        List<Review> ReviewList = reviewRepository.findAll(Sort.by(Sort.Direction.DESC, "grade"));
-        return ReviewList;
+    public List<Review> getDGradeReview(Long course_index) {
+        List<Review> reviewList = reviewRepository.findByCourseIndex(course_index);
+        reviewList.sort(Comparator.comparing(Review::getGrade).reversed());
+        return reviewList;
     }
 
     @Override
     @Transactional
-    public List<Review> getAGradeReview() {
-        List<Review> ReviewList = reviewRepository.findAll(Sort.by(Sort.Direction.ASC, "grade"));
-        return ReviewList;
+    public List<Review> getAGradeReview(Long course_index) {
+        List<Review> reviewList = reviewRepository.findByCourseIndex(course_index);
+        reviewList.sort(Comparator.comparing(Review::getGrade));
+        return reviewList;
     }
 
     @Override
     @Transactional
-    public List<Review> getDate() {
-        List<Review> ReviewList = reviewRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
-        return ReviewList;
+    public List<Review> getDate(Long course_index) {
+        List<Review> reviewList = reviewRepository.findByCourseIndex(course_index);
+        reviewList.sort(Comparator.comparing(Review::getDate).reversed());
+        return reviewList;
     }
 
     @Override
     @Transactional
-    public List<Review> getLiked() {
-        List<Review> ReviewList = reviewRepository.findAll(Sort.by(Sort.Direction.DESC, "likes"));
-        return ReviewList;
+    public List<Review> getLiked(Long course_index) {
+        List<Review> reviewList = reviewRepository.findByCourseIndex(course_index);
+        reviewList.sort(Comparator.comparing(Review::getLikes).reversed());
+        return reviewList;
     }
 
     @Override
