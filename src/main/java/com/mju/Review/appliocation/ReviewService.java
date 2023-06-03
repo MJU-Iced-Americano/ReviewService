@@ -6,15 +6,17 @@ import com.mju.Review.presentation.dto.ReviewRegisterDto;
 import java.util.List;
 
 public interface ReviewService {
-    List<Review> getReview();
+    List<Review> getReview(Long course_index);
 
-    void registerReview(ReviewRegisterDto reviewRegisterDto);
+    void registerReview(Long course_index, String userId, ReviewRegisterDto reviewRegisterDto);
 
-    void deleteReview(Long review_index);
+    void deleteReview(Long course_index);
+    void incrementLiked(String userId, Long review_index);
 
-    void incrementLiked(Long review_index);
+    boolean checkIfAlreadyLikedReview(Long review_index, String userId);
 
-    void decrementLiked(Long review_index);
+    void decrementLiked(String userId, Long review_index);
+    boolean checkIfAlreadyDelikedReview(Long review_index, String userId);
 
     List<Review> getDGradeReview();
 
