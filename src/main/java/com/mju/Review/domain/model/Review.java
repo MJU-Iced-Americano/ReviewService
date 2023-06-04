@@ -59,7 +59,7 @@ public class Review {
         return this.reviewList;
     }
 
-    public void addUserName(String userName) {
+    public void addNickName(String userName) {
         this.userName = userName;
     }
 

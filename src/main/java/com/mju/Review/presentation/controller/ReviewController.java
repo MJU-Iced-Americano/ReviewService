@@ -39,8 +39,8 @@ public class ReviewController {
             String userId = review.getUserId();
             userService.checkUserId(userId);
             UserInfoDto userInfoDto = userService.getUserInfoDto(userId);
-            String userName = userInfoDto.getUsername();
-            review.addUserName(userName);
+            String nickName = userInfoDto.getNickname();
+            review.addNickName(nickName);
         }
         return reviewList;
     }

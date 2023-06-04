@@ -23,7 +23,7 @@ public class RequestController {
         Review review = reviewService.getReviewOne(review_index);
         userService.checkUserId(review.getUserId());
         UserInfoDto userInfoDto = userService.getUserInfoDto(review.getUserId());
-        review.addUserName(userInfoDto.getUsername());
+        review.addNickName(userInfoDto.getNickname());
         SingleResult requestResult = responseService.getSingleResult(review);
         return requestResult;
     }
