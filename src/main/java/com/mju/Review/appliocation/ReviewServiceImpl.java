@@ -9,11 +9,8 @@ import com.mju.Review.presentation.dto.ClientReadCourseDto;
 import com.mju.Review.presentation.dto.ReviewRegisterDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.swing.text.html.Option;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +42,6 @@ public class ReviewServiceImpl implements ReviewService {
             Review newreview = Review.builder()
                     .grade(review.getGrade())
                     .user_id(userId)
-                    .date(review.getDate())
                     .review_content(review.getReview_content())
                     .likes(review.getLikes())
                     .courseIndex(course_index)

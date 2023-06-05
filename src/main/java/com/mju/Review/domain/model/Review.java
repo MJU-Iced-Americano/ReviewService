@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class Review {
     @Column(name = "review_grade")
     private Long grade;
     @Column(name = "review_date")
-    private LocalDateTime date;
+    private LocalDate date;
     @Column(name = "review_content")
     private String review_content;
     @Column(name = "course_index")
@@ -65,14 +65,13 @@ public class Review {
 
     @PrePersist
     public void prePersist(){
-        this.date = LocalDateTime.now();
+        this.date = LocalDate.now();
     }
 
     @Builder
-    public Review(Long grade, String user_id, LocalDateTime date, String review_content, int likes, Long courseIndex){
+    public Review(Long grade, String user_id, String review_content, int likes, Long courseIndex){
         this.grade = grade;
         this.userId = user_id;
-        this.date = date;
         this.review_content = review_content;
         this.likes = likes;
         this.courseIndex = courseIndex;
